@@ -1,3 +1,5 @@
+package.path = "/Users/julien/.luarocks/share/lua/5.1/?.lua;/Users/julien/.luarocks/share/lua/5.1/?/init.lua;" .. package.path
+package.cpath = "/Users/julien/.luarocks/lib/lua/5.1/?.so;" .. package.cpath
 require 'torch'
 require 'cunn'
 
@@ -432,7 +434,7 @@ function cunntest.Square_backward()
    mytester:assertlt(error:abs():max(), precision_backward, 'error on state (backward) ')
 end
 
-function cunntest.Max_forward()
+function cunntestx.Max_forward()
    local size1 = math.random(1,1000)
    local size2 = math.random(2,100)
 
@@ -466,7 +468,7 @@ function cunntest.Max_forward()
    mytester:assertlt(error:abs():max(), 1e-8, 'error on indices ')
 end
 
-function cunntest.Max_backward()
+function cunntestx.Max_backward()
    local size1 = math.random(1,1000)
    local size2 = math.random(2,100)
 
@@ -502,7 +504,7 @@ function cunntest.Max_backward()
    mytester:assertlt(error:abs():max(), precision_backward, 'error on state (backward) ')
 end
 
-function cunntest.Mean_forward()
+function cunntestx.Mean_forward()
    local size1 = math.random(1,1000)
    local size2 = math.random(2,100)
 
@@ -536,7 +538,7 @@ function cunntest.Mean_forward()
    mytester:assertlt(error:abs():max(), 1e-8, 'error on indices ')
 end
 
-function cunntest.Mean_backward()
+function cunntestx.Mean_backward()
    local size1 = math.random(1,1000)
    local size2 = math.random(2,100)
 
@@ -1566,7 +1568,7 @@ function nn.testcuda()
    math.randomseed(os.time())
    jac = nn.Jacobian
    mytester = torch.Tester()
-   mytester:add(cunntest)
+   mytester:add(cunntestx)
    mytester:run()
    print ''
    for module,tm in pairs(times) do
