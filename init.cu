@@ -11,6 +11,7 @@
 #include "HardTanh.cu"
 #include "Tanh.cu"
 #include "Max.cu"
+#include "Mean.cu"
 #include "LogSoftMax.cu"
 #include "TemporalConvolution.cu"
 #include "SpatialConvolution.cu"
@@ -32,11 +33,13 @@ LUA_EXTERNC DLL_EXPORT int luaopen_libcunn(lua_State *L);
 
 int luaopen_libcunn(lua_State *L)
 {
+  printf("Calling our global libinit\n");
   lua_newtable(L);
 
   cunn_Tanh_init(L);
   cunn_Sigmoid_init(L);
   cunn_Max_init(L);
+  cunn_Mean_init(L);
   cunn_HardTanh_init(L);
   cunn_LogSoftMax_init(L);
   cunn_TemporalConvolution_init(L);
