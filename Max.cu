@@ -51,6 +51,7 @@ __global__ void max_gradInput(float *input, float *output, float *indices,
 
 static int cunn_Max_updateOutput(lua_State *L)
 {
+    printf("calling our own Max version\n");
   THCudaTensor *input = (THCudaTensor *)luaT_checkudata(L, 2, "torch.CudaTensor");
   int dimension = luaT_getfieldcheckint(L, 1, "dimension")-1;
   THCudaTensor *indices = (THCudaTensor *)luaT_getfieldcheckudata(L, 1, "indices", "torch.CudaTensor");
