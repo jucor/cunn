@@ -8,6 +8,7 @@
 #include <thrust/functional.h>
 #include <thrust/device_ptr.h>
 
+#include "Exp.cu"
 #include "HardTanh.cu"
 #include "Tanh.cu"
 #include "Max.cu"
@@ -34,6 +35,7 @@ int luaopen_libcunn(lua_State *L)
 {
   lua_newtable(L);
 
+  cunn_Exp_init(L);
   cunn_Tanh_init(L);
   cunn_Sigmoid_init(L);
   cunn_Max_init(L);
