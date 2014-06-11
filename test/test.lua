@@ -1,5 +1,6 @@
 require 'torch'
 require 'cunn'
+require 'totem'
 
 local cunntest = {}
 local precision_forward = 1e-4
@@ -1559,7 +1560,7 @@ end
 function nn.testcuda()
    math.randomseed(os.time())
    jac = nn.Jacobian
-   mytester = torch.Tester()
+   mytester = totem.Tester()
    mytester:add(cunntest)
    mytester:run()
    print ''
@@ -1569,4 +1570,3 @@ function nn.testcuda()
 end
 
 nn.testcuda()
-
