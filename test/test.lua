@@ -226,10 +226,8 @@ function test.indexFill()
 end
 
 
-function cutorch.test()
    math.randomseed(os.time())
    torch.manualSeed(os.time())
    tester = torch.Tester()
    tester:add(test)
    tester:run()
-end
