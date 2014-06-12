@@ -145,6 +145,20 @@ function test.std()
    -- compareFloatAndCuda(x, 'std', 2, false)
 end
 
+
+function test.argmax()
+   local sz1 = math.floor(torch.uniform(minsize,maxsize))
+   local x = torch.FloatTensor():rand(sz1)
+   torch.FloatTensor.argmax = function(self)
+       local x, i  = self:max(1)
+       return i[1]
+   end
+   print('cpu argmax:', x:argmax())
+   print('gpu argmax:', x:cuda():argmax())
+   compareFloatAndCuda(x, 'argmax')
+end
+
+
 function test.index()
   local sz1 = math.floor(torch.uniform(minsize,maxsize))
   local sz2 = math.floor(torch.uniform(minsize,maxsize))
