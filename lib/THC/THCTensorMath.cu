@@ -6,6 +6,8 @@
 #include <thrust/functional.h>
 #include <thrust/reduce.h>
 #include <thrust/inner_product.h>
+#include <thrust/extrema.h> /* for ::max_element used in argmaxall */
+#include <thrust/device_vector.h> /* for ::max_element used in argmaxall */
 
 #define NB_THREADS_PER_BLOCK 256
 
@@ -263,6 +265,21 @@ float THCudaTensor_maxall(THCudaTensor *self)
 
   THCudaTensor_free(self);
   return result;
+}
+
+float THCudaTensor_argmaxall(THCudaTensor *self)
+{
+  self = THCudaTensor_newContiguous(self);
+  thrust::device_ptr<float> self_data(THCudaTensor_data(self));
+
+  thrust::device_ptr<float> iter = thrust::max_element(self_data, self_data+THCudaTensor_nElement(self));
+  thrust::device_ptr<float> my_pos = thrust::device_pointer_cast(&iter[0]);
+  unsigned int position = my_pos - self_data;
+  /* float max_val = *iter; */
+
+  THCudaTensor_free(self);
+  /* TODO: find a way to return both the index and the value, and to avoid fload conversion for position */
+  return position + 1;
 }
 
 float THCudaTensor_sumall(THCudaTensor *self)

@@ -246,6 +246,10 @@ for _,name in ipairs({"min", "max", "sum"}) do
                    {name="CudaTensor"},
                    {name="index"}})
 end
+interface:wrap('argmax',
+                  cname("argmaxall"),
+                  {{name="CudaTensor"},
+                   {name="float", creturned=true}})
 
 
 

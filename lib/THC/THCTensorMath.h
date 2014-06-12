@@ -23,6 +23,7 @@ THC_API float THCudaTensor_dot(THCudaTensor *self, THCudaTensor *src);
   
 THC_API float THCudaTensor_minall(THCudaTensor *self);
 THC_API float THCudaTensor_maxall(THCudaTensor *self);
+THC_API float THCudaTensor_argmaxall(THCudaTensor *self);
 THC_API float THCudaTensor_sumall(THCudaTensor *self);
 THC_API void THCudaTensor_min(THCudaTensor *self, THCudaTensor *src, long dim);
 THC_API void THCudaTensor_max(THCudaTensor *self, THCudaTensor *src, long dim);
